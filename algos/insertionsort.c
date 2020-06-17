@@ -2,20 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-/**
- * Just prints out the contents of an array 
- *
- * @param arr The input array
- * @param length The length of the array
- */
-void printarray(char *arr, int length)
-{
-    for (int i = 0; i < length; i++)
-    {
-        printf("%d ", arr[i]);
-    }
-    printf("\n");
-}
+#include "swap.h"
 
 /** 
  * Inserts element at position in dest.
@@ -25,27 +12,26 @@ void printarray(char *arr, int length)
  * @param element The element to insert
  * @param length The length of the array
  */
-void insert(char *dest, int position, char element, int length)
+void insert(int* dest, int position, int element, int size)
 {
-    // Shift everything to the right of the position we're inserting at by one
+    // Shift sorted list that is to the right of the element we're inserting to the right by one
     // to make room for the insertion
-    memcpy(dest + position + 1, dest + position, (length - 1) - position);
+    memcpy(dest + position + 1, dest + position, size * sizeof(int));
+    //printf("Size: %d\n", size);
 
     // Insert at position
     dest[position] = element;
 }
 
 /**
- * Sorts array with insertion sort and places sorted array in dest.
+ * Sorts array with insertion sort 
  *
  * @param source The source buffer
- * @param dest The buffer were the sorted array is stored
  * @param length The length of the buffers (Note: Must be same length)
  */
-void insertion_sort(char *source, char *dest, int length)
+void insertionsort(int* source, int length)
 {
     // Make a sorted list of length 1
-    dest[0] = source[0];
     int sorted_length = 1;
 
     // Iterate over unsorted list
@@ -56,10 +42,12 @@ void insertion_sort(char *source, char *dest, int length)
         {
             // Insert element if the element we're comparing is less than the corresponding element in the dest buf, 
             // or if we're at the end of the sorted list 
-            if (source[i] < dest[j] || j == sorted_length)
-            {
+            if (source[i] < source[j] || j == sorted_length) {
+#ifdef DEBUG
                 printf("Inserting %d at index %d\n", source[i], j);
-                insert(dest, j, source[i], length);
+#endif
+
+                insert(source, j, source[i], sorted_length - j);
                 sorted_length++;
                 break;
             }
@@ -67,11 +55,3 @@ void insertion_sort(char *source, char *dest, int length)
     }
 }
 
-int main(void)
-{
-    int length = 10;
-    char arr[] = {1, 2, 3, 6, 7, 0, 9, 8, 5, 4};
-    char *newarr = (char *)malloc(length * sizeof(char));
-    insertion_sort(arr, newarr, length);
-    printarray(newarr, length);
-}
