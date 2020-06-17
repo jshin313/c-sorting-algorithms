@@ -6,41 +6,31 @@
 #include <insertionsort.h>
 #include <selectionsort.h>
 
-/**
- * Just prints out the contents of an array and some additional info
- *
- * @param arr The input array
- * @param length The length of the array
- */
-void printarray(int* arr, int length, int padding)
-{
-    printf("*");
-    int totalwritten = 2;
-    int charswritten;
-
-    for (int i = 0; i < padding/2 - length; i++)
-        printf(" ");
-
-    totalwritten += padding/2 - length;
-
-    for (int i = 0; i < length; i++)
-    {
-        charswritten = 0;
-        printf("%d %n", arr[i], &charswritten);
-        totalwritten += charswritten;
-    }
-
-    for (int i = 0; i < padding - totalwritten; i++)
-        printf(" ");
-
-    puts("*");
-}
-
 int compare(int* a, int* b) 
 {
     if (*a > *b) return  1;
     if (*b < *a) return -1;
     return 0;
+}
+
+/**
+ * Just prints out the contents of an array and some additional info
+ *
+ * @param arr The input array
+ * @param length The length of the array
+ * @return number of characters written
+ */
+int printarray(int* arr, int length)
+{
+    int totalwritten = 0;
+    int charswritten;
+
+    for (int i = 0; i < length; i++)
+    {
+        printf("%d %n", arr[i], &charswritten);
+        totalwritten += charswritten;
+    }
+    return totalwritten;
 }
 
 int test_inplace_sort(char* name, void (*func)(int*, int), int *tests[], int testnum)
@@ -53,7 +43,20 @@ int test_inplace_sort(char* name, void (*func)(int*, int), int *tests[], int tes
         int length = sizeof(tests[i]);
         (*func)(tests[i], length);
 
-        printarray(tests[i], length, charswritten);
+        printf("*");
+        int totalwritten = 2;
+
+        for (int i = 0; i < charswritten/2 - length; i++)
+            printf(" ");
+
+        totalwritten += charswritten/2 - length;
+
+        totalwritten += printarray(tests[i], length);
+
+        for (int i = 0; i < charswritten - totalwritten; i++)
+            printf(" ");
+        
+        puts("*");
         
         //qsort(arr, sizeof(arr)/sizeof(*arr), sizeof(*arr), comp);
             
