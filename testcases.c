@@ -1,15 +1,20 @@
+/** Just tests all the sorting algos **/
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <limits.h>
+#include <time.h>
 
 #include <bubblesort.h>
 #include <insertionsort.h>
 #include <selectionsort.h>
 
-int compare(int* a, int* b) 
+/** Used by qsort **/
+int compare(const void* a, const void* b) 
 {
-    if (*a > *b) return  1;
-    if (*b < *a) return -1;
+    if (*(int *)a > *(int *)b) return  1;
+    if (*(int *)b < *(int *)a) return -1;
     return 0;
 }
 
@@ -33,34 +38,54 @@ int printarray(int* arr, int length)
     return totalwritten;
 }
 
-int test_inplace_sort(char* name, void (*func)(int*, int), int *tests[], int testnum)
+int test_inplace_sort(char* name, void (*func)(int*, int))
 {
     int charswritten;
-    printf("*************************** %s Test ***********************%n\n", name, &charswritten);
+    printf("******************* %s Test ******************%n\n", name, &charswritten);
 
-    for (int i = 0; i < testnum; i++)
+    for (int i = 10, count = 1; i < 1000000; i *= 10, count++)
     {
-        int length = sizeof(tests[i]);
-        (*func)(tests[i], length);
-
-        printf("*");
-        int totalwritten = 2;
-
-        for (int i = 0; i < charswritten/2 - length; i++)
-            printf(" ");
-
-        totalwritten += charswritten/2 - length;
-
-        totalwritten += printarray(tests[i], length);
-
-        for (int i = 0; i < charswritten - totalwritten; i++)
-            printf(" ");
+        int length = i;
         
-        puts("*");
+        int* test = malloc(sizeof(int) * length);
         
-        //qsort(arr, sizeof(arr)/sizeof(*arr), sizeof(*arr), comp);
-            
+        // Make a copy of the array
+        int* copy = malloc(sizeof(int) * length);    
+
+        srand(time(NULL));
+
+        for (int j = 0; j < length; j++)
+        {
+            int random = rand();
+            test[j] = random;
+            copy[j] = random;
+        }
+        
+
+        // Make the output somewhat nice
+        printf("        Test Case #%02d ", count);
+        
+        clock_t begin = clock(); // Start timer
+        
+        // Call the sort function
+        (*func)(test, length);
+
+        clock_t end = clock();
+
+        double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+        printf("took %lfs      ", time_spent);
+
+        qsort(copy, length, sizeof(*copy), compare);
+        if (!memcmp(copy, test, length * sizeof(*copy))) {
+            printf("Passed!\n");
+        }
+        else {
+            printf("Failed!\n");
+        }
+        free(copy);
+        free(test);
     }
+
     for (int i = 0; i < charswritten; i++)
         printf("*");
 
@@ -71,33 +96,7 @@ int test_inplace_sort(char* name, void (*func)(int*, int), int *tests[], int tes
 
 int main(void)
 {
-    // Tests based off on the test at this link: https://reprog.wordpress.com/2010/05/20/what-does-it-take-to-test-a-sorting-routine/
-
-    int arr1[] = { 0 };
-    int arr2[] = { 0, 0 };
-    int arr3[] = { 0, 0, 0 };
-    int arr4[] = { 0, 1 };
-    int arr5[] = { 1, 0 };
-    int arr6[] = { 0, 1, 2 };
-    int arr7[] = { 0, 2, 1 };
-    int arr8[] = { 1, 0, 2 };
-    int arr9[] = { 1, 2, 0 };
-    int arr10[] = { 2, 0, 1 };
-    int arr11[] = { 2, 1, 0 };
-    int arr12[] = { 0, 1, 1 };
-    int arr13[] = { 1, 0, 1 };
-    int arr14[] = { 1, 1, 0 };
-    int arr15[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-    int arr16[] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-    int arr17[] = { 42, 9, 17, 54, 602, -3, 54, 999, -11 };
-    int arr18[] = { -11, -3, 9, 17, 42, 54, 54, 602, 999 };
-    int arr19[] = { 42, 9, 17, 54, 602, INT_MAX, 54, 999, -11 };
-    int arr20[] = { -11, -3, 9, 17, 42, INT_MIN, 54, 602, 999 };
-
-    int *tests[] = {arr1, arr2, arr3, arr4, arr5, arr6, arr7, arr8, arr9, arr10, arr11, arr12, arr13, arr14, arr15, arr16, arr17, arr18, arr19, arr20};
-    int testnum = 20;
-
-    test_inplace_sort("Bubble Sort", &bubblesort, tests, testnum); 
-    test_inplace_sort("Insertion Sort", &insertionsort, tests, testnum);
-    test_inplace_sort("Selection Sort", &selectionsort, tests, testnum);
+    test_inplace_sort("Insertion Sort", &insertionsort);
+    test_inplace_sort("Selection Sort", &selectionsort);
+    test_inplace_sort("Bubble Sort", &bubblesort);
 }

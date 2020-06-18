@@ -12,11 +12,11 @@
  * @param element The element to insert
  * @param length The length of the array
  */
-void insert(int* dest, int position, int element, int size)
+void insert(int* dest, int position, int element, int length)
 {
     // Shift sorted list that is to the right of the element we're inserting to the right by one
     // to make room for the insertion
-    memcpy(dest + position + 1, dest + position, size * sizeof(int));
+    memcpy(dest + position + 1, dest + position, length * sizeof(int));
     //printf("Size: %d\n", size);
 
     // Insert at position
