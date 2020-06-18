@@ -7,6 +7,12 @@ Note: "Array", "Buffer", and "List" are used interchangeably since they're sort 
 All of these implementations are probably not that efficient or the best. I might have even made some mistakes in the implementation.  
 As stated above, these sorting algos are mainly for me to refer back to and practice my skillz.
 
+## Compilation
+```console
+ $ make
+ $ ./testcases
+```
+
 ## TODO
 Add a table with all Big-O time complexities of algos and how they work
 
