@@ -18,3 +18,5 @@ Add a table with all Big-O time complexities of algos and how they work
 
 Also add pseudocode for algos and step by step diagram maybe for small array.
 E.g. [ 9 ] [ 8 ] [ 4 ] [ 3 ] [ 1 ] [ 7 ] [ 2 ] [ 6 ] [ 5 ] [ 0 ]
+
+

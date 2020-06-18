@@ -9,6 +9,7 @@
 #include <bubblesort.h>
 #include <insertionsort.h>
 #include <selectionsort.h>
+#include <mergesort.h>
 
 /** Used by qsort **/
 int compare(const void* a, const void* b) 
@@ -94,9 +95,12 @@ int test_inplace_sort(char* name, void (*func)(int*, int))
     return 1;
 }
 
+
 int main(void)
 {
+    test_inplace_sort("Merge Sort", &mergesort);
     test_inplace_sort("Insertion Sort", &insertionsort);
     test_inplace_sort("Selection Sort", &selectionsort);
     test_inplace_sort("Bubble Sort", &bubblesort);
+
 }

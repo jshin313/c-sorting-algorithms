@@ -9,7 +9,7 @@ INCLUDESRC = $(wildcard $(INCLUDE_DIR)/*.c)
 OBJ = $(INCLUDESRC:$(INCLUDE_DIR)/%.c=$(OBJ_DIR)/%.o) testcases.o
 
 CC = gcc
-CFLAGS   = -Wall -I$(INCLUDE_DIR)
+CFLAGS   = -Wall -I$(INCLUDE_DIR) -ggdb
 #LDFLAGS  = -Llib
 #LDLIBS   = -lm
 
