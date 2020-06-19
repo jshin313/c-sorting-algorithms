@@ -39,7 +39,7 @@ int printarray(int* arr, int length)
     return totalwritten;
 }
 
-int test_inplace_sort(char* name, void (*func)(int*, int))
+int test_sort(char* name, void (*func)(int*, int))
 {
     int charswritten;
     printf("******************* %s Test ******************%n\n", name, &charswritten);
@@ -64,7 +64,7 @@ int test_inplace_sort(char* name, void (*func)(int*, int))
         
 
         // Make the output somewhat nice
-        printf("        Test Case #%02d ", count);
+        printf("        Test Case #%02d: length of Test Case: 10^%d ", count, count);
         
         clock_t begin = clock(); // Start timer
         
@@ -98,9 +98,9 @@ int test_inplace_sort(char* name, void (*func)(int*, int))
 
 int main(void)
 {
-    test_inplace_sort("Merge Sort", &mergesort);
-    test_inplace_sort("Insertion Sort", &insertionsort);
-    test_inplace_sort("Selection Sort", &selectionsort);
-    test_inplace_sort("Bubble Sort", &bubblesort);
+    test_sort("Merge Sort", &mergesort);
+    test_sort("Insertion Sort", &insertionsort);
+    test_sort("Selection Sort", &selectionsort);
+    test_sort("Bubble Sort", &bubblesort);
 
 }
