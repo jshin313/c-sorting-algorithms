@@ -10,6 +10,7 @@
 #include <insertionsort.h>
 #include <selectionsort.h>
 #include <mergesort.h>
+#include <countingsort.h>
 
 /** Used by qsort **/
 int compare(const void* a, const void* b) 
@@ -57,14 +58,14 @@ int test_sort(char* name, void (*func)(int*, int))
 
         for (int j = 0; j < length; j++)
         {
-            int random = rand();
+            int random = rand() % 10000;
             test[j] = random;
             copy[j] = random;
         }
         
 
         // Make the output somewhat nice
-        printf("        Test Case #%02d: length of Test Case: 10^%d ", count, count);
+        printf("        Test Case #%02d: Length of Test Case: 10^%d ", count, count);
         
         clock_t begin = clock(); // Start timer
         
@@ -72,6 +73,10 @@ int test_sort(char* name, void (*func)(int*, int))
         (*func)(test, length);
 
         clock_t end = clock();
+
+        /* printf("    "); */
+        /* printarray(test, length); */
+        /* puts(""); */
 
         double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
         printf("took %lfs      ", time_spent);
@@ -98,6 +103,7 @@ int test_sort(char* name, void (*func)(int*, int))
 
 int main(void)
 {
+    test_sort("Counting Sort", &countingsort);
     test_sort("Merge Sort", &mergesort);
     test_sort("Insertion Sort", &insertionsort);
     test_sort("Selection Sort", &selectionsort);
