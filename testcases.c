@@ -43,7 +43,8 @@ int printarray(int* arr, int length)
 int test_sort(char* name, void (*func)(int*, int))
 {
     int charswritten;
-    printf("******************* %s Test ******************%n\n", name, &charswritten);
+    printf("****************************** %s Test **********************************%n\n", name, &charswritten);
+    puts("");
 
     for (int i = 10, count = 1; i < 1000000; i *= 10, count++)
     {
@@ -92,6 +93,7 @@ int test_sort(char* name, void (*func)(int*, int))
         free(test);
     }
 
+    puts("");
     for (int i = 0; i < charswritten; i++)
         printf("*");
 
@@ -107,6 +109,6 @@ int main(void)
     test_sort("Merge Sort", &mergesort);
     test_sort("Insertion Sort", &insertionsort);
     test_sort("Selection Sort", &selectionsort);
-    test_sort("Bubble Sort", &bubblesort);
+    /* test_sort("Bubble Sort", &bubblesort); */
 
 }
