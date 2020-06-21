@@ -2,13 +2,15 @@
 % pandoc README.tex -t markdown_github -o README.md 
 \documentclass{article}
 
-\title{Sorting Algos in C}
+\title{Sorting Algos}
+\author{Jacob Shin}
 \date{}
 
 \usepackage{minted}
 \usepackage{hyperref}
 \usepackage{listings}
-\usepackage[margin=0.3in]{geometry}
+\usepackage{graphics}
+\usepackage[margin=0.2in]{geometry}
 \hypersetup{ colorlinks = true, }
 \setlength{\parindent}{0pt} % Gets rid of automatic indenting
 
@@ -17,13 +19,12 @@
 
 \maketitle
 \section{Description}
-Just some sorting algos in C so I can practice implementing stuff. \newline
+Just some sorting algos implemented in C so I can practice implementing stuff. Also some notes about different sorting algos.
 
-Note: "Array", "Buffer", and "List" are used interchangeably since they're sort of all the same things.
+Note: "Array", "Buffer", and "List" are used interchangeably since they're sort of all the same things. \newline
 
-\section{Warning}
-All of these implementations are probably not that efficient or the best. I might have even made some mistakes in the implementation.  
 As stated above, these sorting algos are mainly for me to refer back to and practice my skillz.
+If you see any mistakes (in the code or in my notes below, feel free to create an issue or something.
 
 \section{Compilation}
 
@@ -42,7 +43,9 @@ The table below is from \href{https://en.wikipedia.org/wiki/Sorting_algorithm}{w
         Selection Sort & $O(n^2)$ & $O(n^2)$ & $O(n^2)$ & $O(1)$ & No & Selection & & \href{algos/selectionsort.c}{selectionsort.c} \\
         Insertion Sort & $O(n)$ & $O(n^2)$ & $O(n^2)$ & $O(1)$ & Yes & Insertion & & \href{algos/insertionsort.c}{insertionsort.c} \\
         Merge Sort & $O(n \log_2(n))$ & $O(n \log_2(n))$ & $O(n \log_2(n)) $ & $O(n)$ & Yes & Merging & & \href{algos/mergesort.c}{mergesort.c} \\
-        Counting Sort & $O(n + k)$ & $O(n + k)$ & $O(n + k) $ & $O(n + k)$ & Yes &  & k is the range & \href{algos/countingsort.c}{countingsort.c} \\
+        Counting Sort & $O(n + k)$ & $O(n + k)$ & $O(n + k) $ & $O(n + k)$ & Yes & Non-comp & k is the range & \href{algos/countingsort.c}{countingsort.c} \\
+        Quick Sort & $O(n \log_2(n))$ & $O(n \log_2(n))$ & $O(n^2) $ & $O(\log_2(n))$ & No & Partitioning &   & \href{algos/quicksort.c}{quicksort.c} \\
+
     \hline
 \end{tabular}
 \end{center}
@@ -53,12 +56,15 @@ The table below is from \href{https://en.wikipedia.org/wiki/Sorting_algorithm}{w
 Keep comparing adjacent elements in the array and "bubble" up the largest element by swapping.
 There are n rounds and after k rounds, the kth largest element is in the right position.
 \begin{lstlisting}
-[3] [2] [4] [5] [1] Starting array
-[2] [3] [4] [5] [1] Swap 2 and 3
-[2] [3] [4] [1] [5] Swap 5 and 1
-[2] [3] [1] [4] [5] Swap 4 and 1
-[2] [1] [3] [4] [5] Swap 3 and 1
-[1] [2] [3] [4] [5] Swap 2 and 1
+[3 2 4 5 1] Starting array
+[2 3 4 5 1] Swap 2 and 3
+[2 3 4 1 5] Swap 5 and 1
+[2 3 1 4 5] Swap 4 and 1
+[2 1 3 4 5] Swap 3 and 1
+[1 2 3 4 5] Swap 2 and 1
+
+Best Case: [1 2 3 4 5]
+Worst Case: [5 4 3 2 1]
 \end{lstlisting}
 
 \section{Selection Sort}
@@ -71,6 +77,8 @@ There are n rounds. During each round, find the smallest element and swap it wit
 [1] [2] [4] [5] [3] 2 is already in place
 [1] [2] [3] [5] [4] Swap 4 and 3
 [1] [2] [3] [4] [5] Swap 4 and 5
+
+Best Case = Worst Case
 \end{lstlisting}
 
 \section{Insertion Sort}
@@ -81,14 +89,71 @@ At the beginning the sorted list is just the first element of the array and the 
 During each round, insert the first element of the unsorted list into the correct position at the sorted list.
 Inserting might involve shifting the unsorted part over to the right.
 \begin{lstlisting}
-[3] [2] [4] [5] [1] Starting array
-[2] [3] [4] [5] [1] Insert 2 before 3
-[2] [3] [4] [5] [1] Insert 4 after 3
-[2] [3] [4] [5] [1] Insert 5 after 4
-[1] [2] [3] [4] [5] Insert 1 before 2
+[3] [2 4 5 1] Starting array
+[2 3] [4 5 1] Insert 2 before 3
+[2 3 4] [5 1] Insert 4 after 3
+[2 3 4 5] [1] Insert 5 after 4
+[1 2 3 4 5] Insert 1 before 2
+
+Best Case: [1 2 3 4 5]
+Worst Case: [5 4 3 2 1]
 \end{lstlisting}
 
 \section{Merge Sort}
+\href{algos/mergesort.c}{mergesort.c} 
+
+\begin{enumerate}
+\item Divide the array/subarray in half 
+\item Recursively sort the two halves
+\item Merge the two halves together
+\end{enumerate}
+The recursion takes $O(log_2(n))$ sublevels and merging takes $O(n)$ time.
+\begin{lstlisting}
+[3 2 4 5 1]         Starting array
+[3 2] [4 5 1]       Split the Array
+[3 2] [4] [5 1]     Split the Arrays
+[3] [2] [4] [5] [1] Split the Arrays. It took log(n) steps to reach the base case
+[2 3] [4] [1 5]     Merge Subarrays
+[2 3] [1 4 5]       Merge Subarrays
+[1 2 3 4 5]         Merge Subarrays
+\end{lstlisting}
+\href{https://youtu.be/alJswNJ4P3U}{Here} for a more in-depth analysis on the runtime efficiency.
+\href{https://stackoverflow.com/q/24594112/9512643}{This} talks about the worst case for merge sort.
+
 \section{Counting Sort}
+\href{algos/counting.c}{counting.c} \newline
+
+Create a "bookkeeping" array of length k, where k is the range of the dataset.
+Keep track of how many times each element appears with the bookkeeping array.
+Constructing the bookkeeping array takes $O(n)$ time and making the sorted array takes $O(k)$ time.
+Thus the total time is $O(n + k)$.
+\begin{lstlisting}
+[3 2 4 5 1]         Starting array
+[1 1 1 1 1]         Bookkeeping array
+\end{lstlisting}
+
+\section{Quick Sort}
+\href{algos/quicksort.c}{quicksort.c} \newline
+
+\textbf{Using External Memory}
+\begin{itemize}
+\item Choose a pivot (in this example, the first element). 
+\item All elements to the less than the pivot go to the "left" subarray and those greater go to the "right" subarray.
+\item Choose a pivot for each subarray and repeat the above step
+\item Once the base case is reached (subarray length of 1), just combine the subarrays. \newline
+\end{itemize}
+
+\textbf{Using stack space ("In Place")}
+\begin{itemize}
+\item \newline
+\end{itemize}
+
+\begin{lstlisting}
+[3 2 4 5 1]         Starting array
+
+Worst Case (If you make the first item the pivot): [1 2 3 4 5] 
+\end{lstlisting}
+
+Note: In the actual code, I use the "median-of-three" rule to choose the pivot (median of first, middle, and last elements).
 
 \end{document}
