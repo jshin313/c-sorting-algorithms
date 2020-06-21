@@ -1,3 +1,5 @@
+% To convert to Github Flavored Markdown
+% pandoc README.tex -t markdown_github -o README.md 
 \documentclass{article}
 
 \title{Sorting Algos in C}
@@ -36,16 +38,17 @@ $ ./testcases
     \begin{tabular}{ |c|c|c|c|c|c|c|c|c| }
     \hline
     \textbf{Name} & \textbf{Best} & \textbf{Worst} & \textbf{Average} & \textbf{Memory} & \textbf{Stable} & \textbf{Method} & \textbf{Notes} & \textbf{Code}\\
-        Bubble Sort & $O(n)$ & $O(n^2)$ & $O(n^2)$ & $O(1)$ & Yes & Swapping & Small code size & \href{bubblesort.c}{bubblesort.c} \\
-        Selection Sort & $O(n^2)$ & $O(n^2)$ & $O(n^2)$ & $O(1)$ & No & Selection & & \href{selectionsort.c}{selectionsort.c} \\
-        Insertion Sort & $O(n)$ & $O(n^2)$ & $O(n^2)$ & $O(1)$ & Yes & Insertion & & \href{insertionsort.c}{insertionsort.c} \\
-        Merge Sort & $O(n \log_2(n))$ & $O(n \log_2(n))$ & $O(n \log_2(n)) $ & $O(n)$ & Yes & Merging & & \href{mergesort.c}{mergesort.c} \\
-        Counting Sort & $O(n + k)$ & $O(n + k)$ & $O(n + k) $ & $O(n + k)$ & Yes &  & k is the range & \href{countingsort.c}{countingsort.c} \\
+        Bubble Sort & $O(n)$ & $O(n^2)$ & $O(n^2)$ & $O(1)$ & Yes & Swapping & Small code size & \href{algos/bubblesort.c}{bubblesort.c} \\
+        Selection Sort & $O(n^2)$ & $O(n^2)$ & $O(n^2)$ & $O(1)$ & No & Selection & & \href{algos/selectionsort.c}{selectionsort.c} \\
+        Insertion Sort & $O(n)$ & $O(n^2)$ & $O(n^2)$ & $O(1)$ & Yes & Insertion & & \href{algos/insertionsort.c}{insertionsort.c} \\
+        Merge Sort & $O(n \log_2(n))$ & $O(n \log_2(n))$ & $O(n \log_2(n)) $ & $O(n)$ & Yes & Merging & & \href{algos/mergesort.c}{mergesort.c} \\
+        Counting Sort & $O(n + k)$ & $O(n + k)$ & $O(n + k) $ & $O(n + k)$ & Yes &  & k is the range & \href{algos/countingsort.c}{countingsort.c} \\
     \hline
 \end{tabular}
 \end{center}
 
 \section{Bubble Sort}
+\href{algos/bubblesort.c}{bubblesort.c}
 Keep comparing adjacent elements in the array and "bubble" up the largest element by swapping.
 There are n rounds and after k rounds, the kth largest element is in the right position.
 \begin{lstlisting}
@@ -58,6 +61,7 @@ There are n rounds and after k rounds, the kth largest element is in the right p
 \end{lstlisting}
 
 \section{Selection Sort}
+\href{algos/selectionsort.c}{selectionsort.c}
 There are n rounds. During each round, find the smallest element and swap it with the element at the beginning. Repeat.
 \begin{lstlisting}
 [3] [2] [4] [5] [1] Starting array
@@ -68,6 +72,7 @@ There are n rounds. During each round, find the smallest element and swap it wit
 \end{lstlisting}
 
 \section{Insertion Sort}
+\href{algos/insertionsort.c}{insertionsort.c}
 Have a "sorted" list and an "unsorted" list.
 At the beginning the sorted list is just the first element of the array and the unsorted part is the rest of the array.
 During each round, insert the first element of the unsorted list into the correct position at the sorted list.

@@ -23,19 +23,19 @@ $ ./testcases
 Table
 =====
 
-|                |                              |                              |                              |                |            |            |                 |                                    |
-|:--------------:|:----------------------------:|:----------------------------:|:----------------------------:|:--------------:|:----------:|:----------:|:---------------:|:----------------------------------:|
-|    **Name**    |           **Best**           |           **Worst**          |          **Average**         |   **Memory**   | **Stable** | **Method** |    **Notes**    |              **Code**              |
-|   Bubble Sort  |           *O*(*n*)           |     *O*(*n*<sup>2</sup>)     |     *O*(*n*<sup>2</sup>)     |     *O*(1)     |     Yes    |  Swapping  | Small code size |    [bubblesort.c](bubblesort.c)    |
-| Selection Sort |     *O*(*n*<sup>2</sup>)     |     *O*(*n*<sup>2</sup>)     |     *O*(*n*<sup>2</sup>)     |     *O*(1)     |     No     |  Selection |                 | [selectionsort.c](selectionsort.c) |
-| Insertion Sort |           *O*(*n*)           |     *O*(*n*<sup>2</sup>)     |     *O*(*n*<sup>2</sup>)     |     *O*(1)     |     Yes    |  Insertion |                 | [insertionsort.c](insertionsort.c) |
-|   Merge Sort   | *O*(*n*log<sub>2</sub>(*n*)) | *O*(*n*log<sub>2</sub>(*n*)) | *O*(*n*log<sub>2</sub>(*n*)) |    *O*(*n*)    |     Yes    |   Merging  |                 |     [mergesort.c](mergesort.c)     |
-|  Counting Sort |        *O*(*n* + *k*)        |        *O*(*n* + *k*)        |        *O*(*n* + *k*)        | *O*(*n* + *k*) |     Yes    |            |  k is the range |  [countingsort.c](countingsort.c)  |
+|                |                              |                              |                              |                |            |            |                 |                                          |
+|:--------------:|:----------------------------:|:----------------------------:|:----------------------------:|:--------------:|:----------:|:----------:|:---------------:|:----------------------------------------:|
+|    **Name**    |           **Best**           |           **Worst**          |          **Average**         |   **Memory**   | **Stable** | **Method** |    **Notes**    |                 **Code**                 |
+|   Bubble Sort  |           *O*(*n*)           |     *O*(*n*<sup>2</sup>)     |     *O*(*n*<sup>2</sup>)     |     *O*(1)     |     Yes    |  Swapping  | Small code size |    [bubblesort.c](algos/bubblesort.c)    |
+| Selection Sort |     *O*(*n*<sup>2</sup>)     |     *O*(*n*<sup>2</sup>)     |     *O*(*n*<sup>2</sup>)     |     *O*(1)     |     No     |  Selection |                 | [selectionsort.c](algos/selectionsort.c) |
+| Insertion Sort |           *O*(*n*)           |     *O*(*n*<sup>2</sup>)     |     *O*(*n*<sup>2</sup>)     |     *O*(1)     |     Yes    |  Insertion |                 | [insertionsort.c](algos/insertionsort.c) |
+|   Merge Sort   | *O*(*n*log<sub>2</sub>(*n*)) | *O*(*n*log<sub>2</sub>(*n*)) | *O*(*n*log<sub>2</sub>(*n*)) |    *O*(*n*)    |     Yes    |   Merging  |                 |     [mergesort.c](algos/mergesort.c)     |
+|  Counting Sort |        *O*(*n* + *k*)        |        *O*(*n* + *k*)        |        *O*(*n* + *k*)        | *O*(*n* + *k*) |     Yes    |            |  k is the range |  [countingsort.c](algos/countingsort.c)  |
 
 Bubble Sort
 ===========
 
-Keep comparing adjacent elements in the array and “bubble” up the largest element by swapping. There are n rounds and after k rounds, the kth largest element is in the right position.
+[bubblesort.c](algos/bubblesort.c) Keep comparing adjacent elements in the array and “bubble” up the largest element by swapping. There are n rounds and after k rounds, the kth largest element is in the right position.
 
     [3] [2] [4] [5] [1] Starting array
     [2] [3] [4] [5] [1] Swap 2 and 3
@@ -47,7 +47,7 @@ Keep comparing adjacent elements in the array and “bubble” up the largest el
 Selection Sort
 ==============
 
-There are n rounds. During each round, find the smallest element and swap it with the element at the beginning. Repeat.
+[selectionsort.c](algos/selectionsort.c) There are n rounds. During each round, find the smallest element and swap it with the element at the beginning. Repeat.
 
     [3] [2] [4] [5] [1] Starting array
     [1] [2] [4] [5] [3] Swap 3 and 1
@@ -58,7 +58,7 @@ There are n rounds. During each round, find the smallest element and swap it wit
 Insertion Sort
 ==============
 
-Have a “sorted” list and an “unsorted” list. At the beginning the sorted list is just the first element of the array and the unsorted part is the rest of the array. During each round, insert the first element of the unsorted list into the correct position at the sorted list. Inserting might involve shifting the unsorted part over to the right.
+[insertionsort.c](algos/insertionsort.c) Have a “sorted” list and an “unsorted” list. At the beginning the sorted list is just the first element of the array and the unsorted part is the rest of the array. During each round, insert the first element of the unsorted list into the correct position at the sorted list. Inserting might involve shifting the unsorted part over to the right.
 
     [3] [2] [4] [5] [1] Starting array
     [2] [3] [4] [5] [1] Insert 2 before 3
