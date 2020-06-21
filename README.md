@@ -116,17 +116,24 @@ Quick Sort
 
 [quicksort.c](algos/quicksort.c)
 
-Choose a pivot (in this example case the last element).
+**Using External Memory**
 
-All elements to the less than the pivot go to the “left” subarray and those greater go to the “right” subarray.
+-   Choose a pivot (in this example, the first element).
 
-Choose a pivot for each subarray and repeat the above step
+-   All elements to the less than the pivot go to the “left” subarray and those greater go to the “right” subarray.
 
-Once the base case is reached (subarray length of 1), just combine the subarrays.
+-   Choose a pivot for each subarray and repeat the above step
+
+-   Once the base case is reached (subarray length of 1), just combine the subarrays.
+
+**Using stack space (“In Place”)**
+
+-   
+
+<!-- -->
 
     [3 2 4 5 1]         Starting array
-    [3 2 4 5 1]         Starting array
 
-    Worst Case (If you make the last item the pivot): [1 2 3 4 5] 
+    Worst Case (If you make the first item the pivot): [1 2 3 4 5] 
 
 Note: In the actual code, I use the “median-of-three” rule to choose the pivot (median of first, middle, and last elements).
