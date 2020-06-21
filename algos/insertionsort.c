@@ -40,8 +40,9 @@ void insertionsort(int* source, int length)
         // Iterate over sorted list
         for (int j = 0; j < sorted_length + 1; j++)
         {
-            // Insert element if the element we're comparing is less than the corresponding element in the dest buf, 
-            // or if we're at the end of the sorted list 
+            // Insert element if the element we're comparing is less than 
+            // the corresponding element in the dest buf, or if we're at 
+            // the end of the sorted list 
             if (source[i] < source[j] || j == sorted_length) {
 #ifdef DEBUG
                 printf("Inserting %d at index %d\n", source[i], j);
