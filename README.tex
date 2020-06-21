@@ -8,8 +8,9 @@
 \usepackage{minted}
 \usepackage{hyperref}
 \usepackage{listings}
-\setlength{\parindent}{0pt} % Gets rid of automatic indenting
 \usepackage[margin=0.3in]{geometry}
+\hypersetup{ colorlinks = true, }
+\setlength{\parindent}{0pt} % Gets rid of automatic indenting
 
 
 \begin{document}
@@ -18,9 +19,7 @@
 \section{Description}
 Just some sorting algos in C so I can practice implementing stuff. \newline
 
-Note: "Array", "Buffer", and "List" are used interchangeably since they're sort of all the same things. \newline
-
-The table below is from \href{https://en.wikipedia.org/wiki/Sorting_algorithm}{wikipedia}. \newline
+Note: "Array", "Buffer", and "List" are used interchangeably since they're sort of all the same things.
 
 \section{Warning}
 All of these implementations are probably not that efficient or the best. I might have even made some mistakes in the implementation.  
@@ -34,6 +33,7 @@ $ ./testcases
 \end{minted}
 
 \section{Table}
+The table below is from \href{https://en.wikipedia.org/wiki/Sorting_algorithm}{wikipedia}.
 \begin{center}
     \begin{tabular}{ |c|c|c|c|c|c|c|c|c| }
     \hline
@@ -48,7 +48,8 @@ $ ./testcases
 \end{center}
 
 \section{Bubble Sort}
-\href{algos/bubblesort.c}{bubblesort.c}
+\href{algos/bubblesort.c}{bubblesort.c}  \newline
+
 Keep comparing adjacent elements in the array and "bubble" up the largest element by swapping.
 There are n rounds and after k rounds, the kth largest element is in the right position.
 \begin{lstlisting}
@@ -61,7 +62,8 @@ There are n rounds and after k rounds, the kth largest element is in the right p
 \end{lstlisting}
 
 \section{Selection Sort}
-\href{algos/selectionsort.c}{selectionsort.c}
+\href{algos/selectionsort.c}{selectionsort.c}  \newline
+
 There are n rounds. During each round, find the smallest element and swap it with the element at the beginning. Repeat.
 \begin{lstlisting}
 [3] [2] [4] [5] [1] Starting array
@@ -72,7 +74,8 @@ There are n rounds. During each round, find the smallest element and swap it wit
 \end{lstlisting}
 
 \section{Insertion Sort}
-\href{algos/insertionsort.c}{insertionsort.c}
+\href{algos/insertionsort.c}{insertionsort.c}  \newline
+
 Have a "sorted" list and an "unsorted" list.
 At the beginning the sorted list is just the first element of the array and the unsorted part is the rest of the array.
 During each round, insert the first element of the unsorted list into the correct position at the sorted list.
