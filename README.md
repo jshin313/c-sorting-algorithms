@@ -111,7 +111,7 @@ Create a “bookkeeping” array of length k, where k is the range of the datase
     [3 2 4 5 1]         Starting array
     [1 1 1 1 1]         Bookkeeping array
 
-Quick Sort
+Quick Sort (Not Implemented Yet)
 ==========
 
 [quicksort.c](algos/quicksort.c)
